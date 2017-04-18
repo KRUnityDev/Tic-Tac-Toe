@@ -108,21 +108,41 @@ bool Game::findWinner()
 		&& gameBoard.GetField(2, 0).GetState() != Field::State::Empty && gameBoard.GetField(1, 1).GetState() != Field::State::Empty && gameBoard.GetField(0, 2).GetState() != Field::State::Empty)
 		return true;
 
-	return false;
+	//Checking if is empty field on board
+	for(int y = 0; y<gameBoard.SizeY; y++)
+	{
+		for(int x = 0; x<gameBoard.SizeX; x++)
+		{
+			if (gameBoard.GetField(x, y).GetState() == Field::State::Empty)
+			{
+				return false;
+			}
+		}
+	}
+	draw = true;
+	return true;
 }
 
 void Game::gameEnd()
 {
-	std::cout << "GAME OVER | ";
-	switch(currentRound)
+	std::string message = "GAME OVER | ";
+	if(draw)
 	{
+		switch (currentRound)
+		{
 		case Round::firstPlayerRound:
-			std::cout << "First Player Wins!";
+			message += "First Player Wins!";
 			break;
 		case Round::secondPlayerRound:
-			std::cout << "Second Player Wins!";
+			message += "Second Player Wins!";
 			break;
+		}
 	}
+	else
+	{
+		message += "There is a draw!";
+	}
+	renderer.RenderGameOverBoard(message);
 	std::cin.get();
 	//exit(0);
 }

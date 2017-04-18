@@ -3,10 +3,7 @@
 int main()
 {
 	Game game;
-	while(true)
-	{
-		if (!game.Loop()) break;
-	}
+	while(game.Loop()){}
 	std::cin.get();
 	return 0;
 }

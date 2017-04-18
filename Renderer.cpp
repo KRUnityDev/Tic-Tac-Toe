@@ -41,7 +41,18 @@ void Renderer::renderTitleBoard()
 	std::cout << titleBoard;
 }
 
+void Renderer::RenderGameOverBoard(std::string message)
+{
+	std::cout << message;
+}
+
 void Renderer::clearConsole()
 {
+#if defined(_WIN32)
 	system("cls");
+#elif defined(_WIN64)
+	system("cls");
+#elif defined(__linux__)
+	system("clear");
+#endif
 }
